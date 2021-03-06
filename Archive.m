@@ -1,5 +1,5 @@
 classdef Archive < handle
-% Evolution strategy archive, containing best L AND best L dissimilar solutions
+% Tabu search archive, containing best L AND best L dissimilar solutions
     properties
         L
         s_solutions % Best L solutions
@@ -10,7 +10,7 @@ classdef Archive < handle
     
     methods (Access = public)
         function obj = Archive(L, Dmin, Dsim)
-            % Constructor
+        % Constructor
             obj.L = L;
             obj.Dmin = Dmin;
             obj.Dsim = Dsim;
@@ -20,12 +20,10 @@ classdef Archive < handle
             obj.d_solutions(L,1) = Solution();
         end
         
-        function update(obj, offspring)
+        function update(obj, solution)
         % Update both archive arrays
-            for i = 1:offspring.lambda
-                obj.update_s(offspring.solutions(i));
-                obj.update_d(offspring.solutions(i));
-            end
+            obj.update_s(solution);
+            obj.update_d(solution);
         end
     end
     methods (Access = private)
@@ -97,4 +95,3 @@ classdef Archive < handle
         end
     end
 end
-
